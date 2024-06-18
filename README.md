@@ -1,53 +1,41 @@
-I've created a special tool in C++API that makes linear regression easy. It helps you train your model, predict outcomes from your data, and even assess how accurate those predictions are using the R2 score. This tool brings together everything you need to analyze data and make predictions quickly and effectively, all within the familiar C++ programming environment. It's designed to simplify the process of understanding and using linear regression for anyone working with data analysis and modeling.
+Sure, here's a more detailed explanation:
 
-Working:
-•	  Just include the API using traditional way.
-EX: 
-#include “regression.h”
-•	Prepare a 2D dataset using array in c++.
+I've developed a C++ API that facilitates linear regression—a statistical technique for modeling relationships between variables. This API is designed to simplify the entire process within the C++ programming environment, making it accessible for data analysis tasks.
 
-	Note: Always use float or double for a dataset list.
-Float x [] = {10.1, 20.2, 40.6, 1.1, 34.5};
-Float y [] = {1000.4, 2000.5, 10.5, 70.6, 10.30};
-•	Now Initialize an object of regression class 
-	
-	    Linear_regression linear;
+Initialization: To start using the API, you initialize an object of the Linear_regression class. This object will be used to access all functionalities provided by the API.
 
-So here Linear_regression is our class and linear is our object to access the functionality
-  
-•	Now pass dataset using following function for training the model.
+cpp
+Copy code
+Linear_regression linear;
+Training the Model: The API allows you to train a linear regression model using your dataset. You pass your input variables (x_dataset) and corresponding output variables (y_dataset) to the data_to_train function.
 
-linear.data_to_train(x_dataset,y_dataset);
-•	Now predict the data.
+cpp
+Copy code
+linear.data_to_train(x_dataset, y_dataset);
+This function computes the parameters of the linear regression model (such as slope and intercept) based on the provided data.
 
-linear.topredict(data_to_predict);
+Making Predictions: Once the model is trained, you can use it to make predictions on new data points or single values. This is achieved using the topredict function.
 
+cpp
+Copy code
+double predicted_value = linear.topredict(data_to_predict);
+Here, data_to_predict can be a single data point or an array of data points (depending on the API design).
 
-EX:
-linear.topredict(675.42);
+Assessing Accuracy: To evaluate how well your model predicts outcomes, you can calculate the R2 score. The R2 score measures the proportion of the variance in the dependent variable that is predictable from the independent variables.
 
-So it will predict value based on our model trained and return the value.
+cpp
+Copy code
+double r2_score = linear.r2_score(y_dataset);
+A higher R2 score indicates a better fit of the model to the data.
 
-•	You even can print the r2 score of prediction using following function.
+Additional Information: The API provides functions to access additional information such as its version and details about the tool itself.
 
-linear.r2_score (y_dataset)
+cpp
+Copy code
+linear.version();
+linear.about();
+These functions can be used to get version information and detailed descriptions of the API and its capabilities.
 
-•	 You even print slope, intercept, mean of x, mean of y and even predicted y list which are processed in training process using direct define the variable.
+Development Stage: It's important to note that this API is in its early alpha stage. This means it's under development and may not yet be fully stable or accurate. It's primarily intended for research purposes, allowing users to experiment with linear regression techniques within C++.
 
-1.	For slope just use “slope” like std::cout<<slope;
-2.	For intercept use “c_intercept” like std::cout<<c_intercept;
-3.	For mean of x : std::cout<<mean_x;
-4.	For mean of y : std::cout<<mean_y;
-5.	For predicted y get a single or whole list using:
-(a)	std::cout<<line_y[index];
-(b)	Using looping technique while iterating the element in container.
-
-•	 For getting more info related tool you use below function
-
-linear.version(); - for version identification
-linear.about(); - for information regarding tool;
-
-
-
-Note: This project is just for my research purpose hat how linear regression work and it’s in current development stage and can contain false prediction some time so it’s a prebuild early stage alpha so everybody can use and identify the issue.  
-
+This API aims to make linear regression accessible and straightforward for data analysts and researchers working with C++ programming, providing essential functionalities like model training, prediction, accuracy assessment, and tool information retrieval.
