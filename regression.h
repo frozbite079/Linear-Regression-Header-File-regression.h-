@@ -7,7 +7,7 @@ double long  sum_of_square=0.0;
 double long  slope = 0.0;
 double long  c_intercept = 0.0;
 unsigned int size_of_array =0;
-signed double long  line_y[0];
+long double  line_y[0];
 double long  ssr[0];
 double long  sst[0];
 double long  r2_score_1 = 0.0;
@@ -23,7 +23,7 @@ class Linear_regression{
 
         const void data_to_train(const T& x,const T& y);
         const void topredict(auto predict);
-        const void r2_score(auto y);
+        void r2_score(const auto y);
 
         void version();
         void about();
@@ -41,7 +41,7 @@ void Linear_regression::version(){
 }
 //r2_score
 
-void Linear_regression::r2_score(auto y){
+void Linear_regression::r2_score(const auto y){
     double long ssr[0+size_of_array];
     double long ssr_store = 0.0,sst_store = 0.0;
     double long sst[0+size_of_array];
@@ -80,7 +80,7 @@ void Linear_regression::r2_score(auto y){
 }
 //prediction of random variable
 
-void Linear_regression::topredict(auto predict){
+const void Linear_regression::topredict(auto predict){
 
     double y = 0.0 ;
 
@@ -168,7 +168,7 @@ void regression_process(auto x,auto y,int total_ele){
 
 template <typename T>
 
-void Linear_regression::data_to_train(const T& x,const T& y){
+const void Linear_regression::data_to_train(const T& x,const T& y){
 
     int total_ele =0;
     for(auto i:x){
