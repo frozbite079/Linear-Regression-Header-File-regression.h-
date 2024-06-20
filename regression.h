@@ -1,16 +1,16 @@
 #include <iostream>
 
-float mean_x= 0.0;
-float mean_y =0.0;
-float sum_of_pro = 0.0;
-float sum_of_square=0.0;
-float slope = 0.0;
-float c_intercept = 0.0;
-int size_of_array =0;
-float line_y[0];
-float ssr[0];
-float sst[0];
-float r2_score_1 = 0.0;
+double long mean_x= 0.0;
+double long mean_y =0.0;
+double long  sum_of_pro = 0.0;
+double long  sum_of_square=0.0;
+double long  slope = 0.0;
+double long  c_intercept = 0.0;
+unsigned int size_of_array =0;
+signed double long  line_y[0];
+double long  ssr[0];
+double long  sst[0];
+double long  r2_score_1 = 0.0;
 
 
 
@@ -21,9 +21,10 @@ class Linear_regression{
 
         template <typename T>
 
-        void data_to_train(const T& x,const T& y);
-        void topredict(auto predict);
-        void r2_score(auto y);
+        const void data_to_train(const T& x,const T& y);
+        const void topredict(auto predict);
+        const void r2_score(auto y);
+
         void version();
         void about();
 };
@@ -41,12 +42,12 @@ void Linear_regression::version(){
 //r2_score
 
 void Linear_regression::r2_score(auto y){
-    float ssr[0+size_of_array];
-    float ssr_store = 0.0,sst_store = 0.0;
-    float sst[0+size_of_array];
-    float total_ssr = 0.0 , total_sst = 0.0;
+    double long ssr[0+size_of_array];
+    double long ssr_store = 0.0,sst_store = 0.0;
+    double long sst[0+size_of_array];
+    double long total_ssr = 0.0 , total_sst = 0.0;
 
-    for(int d =0;d<size_of_array;d++){
+    for(size_t d =0;d<size_of_array;d++){
 
         ssr_store = y[d] - line_y[d];
         ssr_store = ssr_store * ssr_store;
@@ -55,19 +56,19 @@ void Linear_regression::r2_score(auto y){
 
 
     }
-    for(int sum_ssr =0 ;sum_ssr<size_of_array;sum_ssr++){
+    for(size_t sum_ssr =0 ;sum_ssr<size_of_array;sum_ssr++){
 
         total_ssr += ssr[sum_ssr];
     }
 
-    for(int e =0;e<size_of_array;e++){
+    for(size_t e =0;e<size_of_array;e++){
         sst_store = y[e] - mean_y;
 
         sst_store = sst_store * sst_store;
         sst[e] = sst_store;
     }
 
-    for(int sum_sst =0 ;sum_sst<size_of_array;sum_sst++){
+    for(size_t sum_sst =0 ;sum_sst<size_of_array;sum_sst++){
 
         total_sst += ssr[sum_sst];
     }
@@ -81,9 +82,10 @@ void Linear_regression::r2_score(auto y){
 
 void Linear_regression::topredict(auto predict){
 
-    float y = 0.0 ;
+    double y = 0.0 ;
 
     y = slope*predict + c_intercept;
+    std::cout<<y;
 
 
 
@@ -91,20 +93,20 @@ void Linear_regression::topredict(auto predict){
 void regression_process(auto x,auto y,int total_ele){
 
 
-    float val_x = 0.0;
-    float val_y = 0.0;
-    float mul_value;
-    float vals_x=0.0;
-    float sump[total_ele];
-    float square_x=0.0;
-    float sums[total_ele];
-    float predict_y =0.0;
+    double long val_x = 0.0;
+    double long val_y = 0.0;
+    double long mul_value;
+    double long vals_x=0.0;
+    double long sump[total_ele];
+    double long square_x=0.0;
+    double long sums[total_ele];
+    double long predict_y =0.0;
     x[0+total_ele];
     y[0+total_ele];
     line_y[0+total_ele];
 
     //mean of x
-    for(int i=0;i<total_ele;i++){
+    for(size_t i=0;i<total_ele;i++){
 
         mean_x +=x[i];
 
@@ -113,12 +115,12 @@ void regression_process(auto x,auto y,int total_ele){
 
     mean_x = mean_x/total_ele;
     //mean of y
-    for(int j = 0;j<total_ele;j++){
+    for(size_t j = 0;j<total_ele;j++){
         mean_y += y[j];
     }
     mean_y = mean_y/total_ele;
 
-    for(int c= 0;c<total_ele;c++){
+    for(size_t c= 0;c<total_ele;c++){
 
         val_x = x[c] - mean_x;
         val_y = y[c] - mean_y;
@@ -126,14 +128,14 @@ void regression_process(auto x,auto y,int total_ele){
         sump[c] = mul_value;
 
     }
-    for(int g=0;g<total_ele;g++){
+    for(size_t g=0;g<total_ele;g++){
 
         sum_of_pro +=sump[g];
     }
 
 
 
-    for(int k=0;k<total_ele;k++){
+    for(size_t k=0;k<total_ele;k++){
 
         vals_x = x[k] - mean_x;
         square_x = vals_x * vals_x;
@@ -142,7 +144,7 @@ void regression_process(auto x,auto y,int total_ele){
 
     }
 
-    for(int s=0;s<total_ele;s++){
+    for(size_t s=0;s<total_ele;s++){
 
         sum_of_square +=sums[s];
 
@@ -152,7 +154,7 @@ void regression_process(auto x,auto y,int total_ele){
     slope = sum_of_pro/sum_of_square;
     c_intercept = mean_y - slope * mean_x;
 
-     for(int b=0;b<total_ele;b++){
+     for(size_t b=0;b<total_ele;b++){
 
         predict_y = slope * x[b] + c_intercept;
         line_y[b] = predict_y;
