@@ -12,6 +12,7 @@ double long  ssr[0];
 double long  sst[0];
 double long  r2_score_1 = 0.0;
 
+int io = 10;
 
 
 class Linear_regression{
